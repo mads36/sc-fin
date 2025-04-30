@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Mirror - Fashion App</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- CSS -->
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #F7F7F7 0%, #F3E9F1 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Typography */
+    .font-heading {
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    /* Container */
+    .app-container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    /* Background gradient */
+    .fashion-gradient {
+      background: linear-gradient(135deg, #FFF0F3 0%, #E8F4F5 100%);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+    
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-family: 'Quicksand', sans-serif;
+      box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 25px -5px rgba(255, 107, 107, 0.5);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(135deg, #4ECDC4 0%, #7EE0D9 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-family: 'Quicksand', sans-serif;
+      box-shadow: 0 4px 10px rgba(78, 205, 196, 0.3);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 25px -5px rgba(78, 205, 196, 0.5);
+    }
+    
+    /* Outfit cards */
+    .outfit-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .outfit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1);
+    }
+    
+    /* Animation classes */
+    .animate-float-slow {
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .animate-float-medium {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .animate-float-fast {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- HOME SCREEN -->
+    <div class="app-container">
+      <!-- Floating background elements -->
+      <div class="absolute top-0 right-0 opacity-20 -z-10 animate-float-slow">
+        <i class="ri-t-shirt-line text-8xl text-primary"></i>
+      </div>
+      <div class="absolute bottom-10 left-0 opacity-20 -z-10 animate-float-medium">
+        <i class="ri-shirt-line text-8xl text-secondary"></i>
+      </div>
+      <div class="absolute bottom-40 right-10 opacity-20 -z-10 animate-float-fast">
+        <i class="ri-coat-line text-8xl text-accent"></i>
+      </div>
+      <div class="absolute top-40 left-10 opacity-20 -z-10 animate-float-medium">
+        <i class="ri-hoodie-line text-8xl text-primary"></i>
+      </div>
+      
+      <!-- Main content -->
+      <div class="flex-grow flex flex-col items-center justify-center pb-4">
+        <div class="text-center mb-8">
+          <h1 class="font-heading font-bold text-5xl mb-3 text-primary">
+            Smart Mirror
+          </h1>
+          <p class="text-xl text-neutral-dark/70 font-light">
+            Your personal fashion stylist
+          </p>
+        </div>
+        
+        <div class="w-full">
+          <div class="fashion-gradient rounded-3xl p-8 shadow-xl mb-8 relative overflow-hidden border border-white/30 backdrop-blur-sm">
+            <!-- Decorative elements -->
+            <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-primary/20 blur-xl"></div>
+            <div class="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-secondary/20 blur-xl"></div>
+            
+            <div class="space-y-6 relative z-10">
+              <button class="btn-primary group w-full py-4 px-6 rounded-xl font-heading font-semibold text-white text-lg flex items-center justify-center shadow-md">
+                <span class="relative z-10 flex items-center">
+                  <i class="ri-sun-line mr-3 text-2xl"></i>
+                  <span>Select Weather</span>
+                </span>
+              </button>
+              
+              <button class="btn-secondary group w-full py-4 px-6 rounded-xl font-heading font-semibold text-white text-lg flex items-center justify-center shadow-md">
+                <span class="relative z-10 flex items-center">
+                  <i class="ri-calendar-event-line mr-3 text-2xl"></i>
+                  <span>Select Occasion</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Fashion tips carousel -->
+          <div class="rounded-xl p-4 bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg mb-4 cursor-pointer">
+            <div class="flex items-center justify-between">
+              <h3 class="font-heading font-semibold text-sm uppercase tracking-wider text-neutral-dark/60 mb-2">
+                Fashion Tip <span class="text-xs opacity-70">(1/5)</span>
+              </h3>
+              <div class="text-primary text-xs">
+                <i class="ri-arrow-right-circle-line"></i> Tap for more
+              </div>
+            </div>
+            
+            <div class="relative h-[60px] overflow-hidden">
+              <p class="text-sm text-neutral-dark/80">
+                "Layer your clothing for versatility. You can easily adjust your outfit as the temperature changes throughout the day."
+              </p>
+            </div>
+            
+            <div class="flex justify-center mt-2 space-x-1">
+              <span class="inline-block w-2 h-2 rounded-full bg-primary scale-125"></span>
+              <span class="inline-block w-2 h-2 rounded-full bg-gray-300"></span>
+              <span class="inline-block w-2 h-2 rounded-full bg-gray-300"></span>
+              <span class="inline-block w-2 h-2 rounded-full bg-gray-300"></span>
+              <span class="inline-block w-2 h-2 rounded-full bg-gray-300"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center text-neutral-dark/50 mt-2">
+        <p>Tap an option to get personalized fashion recommendations</p>
+      </div>
+    </div>
+
+    <!-- WEATHER SCREEN -->
+    <div class="app-container max-w-md mx-auto px-4 py-8 relative" style="display:none;">
+      <button class="back-button flex items-center font-medium text-primary mb-6 transition-transform hover:-translate-x-1">
+        <i class="ri-arrow-left-line mr-1"></i> Back
+      </button>
+      
+      <h2 class="font-heading font-bold text-2xl mb-6 text-center">Choose Your Weather</h2>
+      
+      <div class="grid grid-cols-1 gap-6 mb-8">
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Sunny fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-sun-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Sunny</h3>
+                </div>
+                <p class="text-sm text-white/80">Perfect for bright, light outfits</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Rainy fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-rainy-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Rainy</h3>
+                </div>
+                <p class="text-sm text-white/80">Stay dry with stylish rainwear</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Cold fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-snowy-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Cold</h3>
+                </div>
+                <p class="text-sm text-white/80">Cozy layers for chilly days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OCCASION SCREEN -->
+    <div class="app-container max-w-md mx-auto px-4 py-8 relative" style="display:none;">
+      <button class="back-button flex items-center font-medium text-primary mb-6 transition-transform hover:-translate-x-1">
+        <i class="ri-arrow-left-line mr-1"></i> Back
+      </button>
+      
+      <h2 class="font-heading font-bold text-2xl mb-6 text-center">Choose Your Occasion</h2>
+      
+      <div class="grid grid-cols-1 gap-6 mb-8">
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Casual fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-t-shirt-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Casual</h3>
+                </div>
+                <p class="text-sm text-white/80">Everyday comfort with style</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1534126416832-a88fdf2911c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Party fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-goblet-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Party</h3>
+                </div>
+                <p class="text-sm text-white/80">Stand out with glamorous looks</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="outfit-card rounded-2xl overflow-hidden shadow-lg bg-white cursor-pointer">
+          <div class="relative h-60">
+            <img src="https://images.unsplash.com/photo-1580913428023-02c695666d61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Business fashion outfit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+              <div class="p-4 text-white">
+                <div class="flex items-center mb-1">
+                  <i class="ri-briefcase-line text-2xl text-accent mr-2"></i>
+                  <h3 class="font-heading font-semibold text-xl">Business</h3>
+                </div>
+                <p class="text-sm text-white/80">Professional looks for the workplace</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTFIT SCREEN -->
+    <div class="app-container max-w-md mx-auto px-4 py-8 relative" style="display:none;">
+      <button class="back-button flex items-center font-medium text-primary mb-6 transition-transform hover:-translate-x-1">
+        <i class="ri-arrow-left-line mr-1"></i> Back
+      </button>
+      
+      <div class="text-center mb-6">
+        <h2 class="font-heading font-bold text-2xl text-primary">Summer Chic</h2>
+        <p class="text-neutral-dark/70">Light and airy outfit for warm days</p>
+      </div>
+      
+      <div class="outfit-container rounded-3xl p-6 shadow-lg mb-8 overflow-hidden" style="background: radial-gradient(circle at 50% 50%, rgba(255, 236, 255, 0.8), rgba(240, 240, 255, 0.6))">
+        <div class="flex justify-center">
+          <div class="w-full max-w-xs relative">
+            <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=700&q=80" alt="Fashion outfit for sunny days" class="w-full h-auto rounded-xl shadow-md">
+          </div>
+        </div>
+        
+        <div class="mt-6 p-4 bg-white/70 backdrop-blur-sm rounded-xl">
+          <h3 class="font-heading font-semibold text-lg mb-2">Outfit Details</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="ri-t-shirt-line text-primary mr-2"></i>
+              <span>Light cotton blouse</span>
+            </li>
+            <li class="flex items-center">
+              <i class="ri-t-shirt-line text-primary mr-2"></i>
+              <span>Fitted denim jeans</span>
+            </li>
+            <li class="flex items-center">
+              <i class="ri-t-shirt-line text-primary mr-2"></i>
+              <span>White sneakers</span>
+            </li>
+            <li class="flex items-center">
+              <i class="ri-t-shirt-line text-primary mr-2"></i>
+              <span>Casual tote bag</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="flex justify-center">
+        <button class="btn-primary py-3 px-8 rounded-xl font-heading font-semibold text-white shadow-md">
+          Try Another Look
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript would normally go here -->
+</body>
+</html>
